@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+</head>
+<body>
+    <header>
+        The Weather Dashboard
+    </header>
+    <div class="row">
+        <div class="col-4 col-md-4" id="side">
+            <p style="margin-left:80px; margin-top:20px">Search for a City:</p>
+            <form class="search" action="/action_page.php" style="margin:auto;max-width:300px">
+                <input type="text" placeholder="Search..">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+
+            <table class="table table-sm">
+                <tr><td scope="row">Austin</th></tr>
+                <tr><td scope="row">Chicago</th></tr>
+                <tr><td scope="row">New York</th></tr>
+                <tr><td scope="row">Orlando</th></tr>
+                <tr><td scope="row">San Francisco</th></tr>
+                <tr><td scope="row">Seatle</th></tr>
+                <tr><td scope="row">Denver</th></tr>
+                <tr><td scope="row">Atlanta</th></tr>
+                </table>
+        </div>
+        <div class="col-8 col-md-8"></div>
+    </div>
+    
+    <script src='script.js'></script>
+</body>
+</html>
+
