@@ -9,14 +9,17 @@ header {
   }
 
 body {
-    background-color: rgb(235, 235, 245);
+    /* background-color: rgb(249, 249, 252); */
     color: hsl(207, 18%, 10%);
     /* font-family: 'Sriracha', cursive; */
 }
 
-table {
-    margin:80px;
+.weatherCard {
+  max-width: 10rem;
+  background-color: #389ff3;
+  margin: 3px;
 }
+
 
   form.search input[type=text] {
     padding: 10px;
@@ -26,7 +29,7 @@ table {
     float: left;
     width: 80%;
     background: #f1f1f1;
-    margin-bottom: ;
+
   }
   
   form.search button {
@@ -49,4 +52,11 @@ table {
     content: "";
     clear: both;
     display: table;
+  }
+
+  td.card{
+    background: rgb(145, 203, 250);
+  }
+  td.card:hover {
+    background-color: #389ff3;
   }
