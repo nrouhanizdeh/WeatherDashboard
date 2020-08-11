@@ -19,31 +19,31 @@
         <div class="row">
             <div class="col-md-3" id="side" >
                 <p style="margin-top: 20px;">Search for a City:</p>
-                <form class="search" action="/action_page.php" style="margin:auto;max-width:300px">
-                    <input type="text" placeholder="Search..">
-                    <button type="submit"><i class="fa fa-search"></i></button>
+                <form class="search" style="margin:auto;max-width:300px">
+                    <input type="text" placeholder="Search.." id="search-term">
+                    <button type="submit" class="runSearch"><i class="fa fa-search"></i></button>
                 </form>
                 <table class="table table-sm" style="margin-top: 20px;">
-                    <tr><td class="card">Austin</th></tr>
-                    <tr><td class="card">Chicago</th></tr>
-                    <tr><td class="card">Los Angeles</th></tr>
-                    <tr><td class="card">New York</th></tr>
-                    <tr><td class="card">Orlando</th></tr>
-                    <tr><td class="card">San Francisco</th></tr>
-                    <tr><td class="card">Seatle</th></tr>
-                    <tr><td class="card">Denver</th></tr>
-                    <tr><td class="card">Atlanta</th></tr>
+                    <tr><td class="card runSearch city">Austin</th></tr>
+                    <tr><td class="card runSearch city">Chicago</th></tr>
+                    <tr><td class="card runSearch city">Los Angeles</th></tr>
+                    <tr><td class="card runSearch city">New York</th></tr>
+                    <tr><td class="card runSearch city">Orlando</th></tr>
+                    <tr><td class="card runSearch city">San Francisco</th></tr>
+                    <tr><td class="card runSearch city">Seatle</th></tr>
+                    <tr><td class="card runSearch city">Denver</th></tr>
+                    <tr><td class="card runSearch city">Atlanta</th></tr>
                 </table>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-9" id="results" >
                 <div class="card" style="margin-top: 60px;">
                     <div class="card-body">
                         <h1 class="card-title" id="topCardTitle"></h1>
-                        <p id="tempreture">Tempreture: </p>
-                        <p id="humidity">Humidity: </p>
-                        <p id="windSpeed">Wind Speed: </p>
-                        <p id="uvIndex">UV Index: </p>
+                        <p id="currentTempreture" style="margin-top: 30px;">Tempreture: </p>
+                        <p id="currentHumidity">Humidity: </p>
+                        <p id="currentWindSpeed">Wind Speed: </p>
+                        <p id="currentUVIndex">UV Index: </p>
                     </div>
                 </div>
                 
@@ -96,6 +96,7 @@
     </div>
         
     </div>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src='script.js'></script>
 </body>
 </html>
