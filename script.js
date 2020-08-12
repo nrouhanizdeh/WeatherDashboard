@@ -21,9 +21,8 @@ function buildQueryURL(timeframe) {
 function showLocalStorage(){
     for (var i = 0; i < localStorage.length; i++){
        var localKey = localStorage.getItem(localStorage.key(i));
-       console.log(localKey);
+       
        if (localStorage.key(i).match(/city\S+/g)){
-            console.log(" ah huh: " + localStorage.key(i));
             $("table").append(`<tr><td class="card runSearch city" id=city_${localKey}>${localKey}</td></tr>`);
         }
     }
@@ -62,7 +61,6 @@ $(".runSearch").on("click", function(event) {
         var tempFar = ((parseFloat(response.main.temp) - 273.15)*9/5 + 32).toFixed(1);
         var cityLat = response.coord.lat;
         var cityLon = response.coord.lon;
-
         // take the two API response Vars above, and writes them to their respetive div/img IDs on the html
         $("#currentTempreture").text("Tempreture: " + tempFar + " °F");
         $("#currentHumidity").text("Humidity: " + response.main.humidity + "%");
