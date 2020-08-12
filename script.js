@@ -17,6 +17,19 @@ function buildQueryURL(timeframe) {
 
   }
 
+
+function showLocalStorage(){
+    for (var i = 0; i < localStorage.length; i++){
+       var localKey = localStorage.getItem(localStorage.key(i));
+       console.log(localKey);
+       if (localStorage.key(i).match(/city\S+/g)){
+            console.log(" ah huh: " + localStorage.key(i));
+            $("table").append(`<tr><td class="card runSearch city" id=city_${localKey}>${localKey}</td></tr>`);
+        }
+    }
+}
+
+showLocalStorage();
 var theURL;
 $("#results").hide();
 $(".runSearch").on("click", function(event) {
@@ -29,7 +42,15 @@ $(".runSearch").on("click", function(event) {
         $("#topCardTitle").text(this.innerHTML + " (" + today + ")" );
     } else {
         theURL = buildQueryURL("current");
-        $("#topCardTitle").text(($("#search-term").val().trim()) + " (" + today + ") " );
+        var searchTerm = $("#search-term").val().trim();
+        
+        if(searchTerm){
+            $("#topCardTitle").text( searchTerm + " (" + today + ") " );
+            //if (!$("#city-chicago")) {
+                localStorage.setItem(`city_${searchTerm.toLowerCase()}`, searchTerm.toLowerCase());
+                $("table").append(`<tr><td class="card runSearch city" id=city_${searchTerm.toLowerCase()}>${searchTerm}</td></tr>`);
+            //}
+        }
     }
 
 
