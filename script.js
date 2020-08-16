@@ -4,11 +4,11 @@ var theURL;
 
 function buildQueryURLcurrent(searchCity) {
     queryParams.q = searchCity.trim();
-    return "http://api.openweathermap.org/data/2.5/weather?" + $.param(queryParams);
+    return "https://api.openweathermap.org/data/2.5/weather?" + $.param(queryParams);
   }
 function buildQueryURLfuture(searchCity) {
     queryParams.q = searchCity.trim();
-    return "http://api.openweathermap.org/data/2.5/forecast?" + $.param(queryParams);
+    return "https://api.openweathermap.org/data/2.5/forecast?" + $.param(queryParams);
   }
 
 function showLocalStorage(){
@@ -31,7 +31,7 @@ function dateFormat(dateAndTime){
 }
 
 function buildQueryURLicon(id){
-    return "http://openweathermap.org/img/wn/" + id + ".png"
+    return "https://openweathermap.org/img/wn/" + id + ".png"
 }
 
 showLocalStorage();
