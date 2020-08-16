@@ -88,7 +88,21 @@ $(".runSearch").on("click", function(event) {
                     url: (queryURLuvindex + $.param(queryParams)),
                     method: "GET"
                 }).then(function(response) {
-                        $("#currentUVIndex").text("UV Index: " + response.value );
+                        $("#currentUVIndex").text(response.value);
+
+                        if (response.value < 3 ){
+                            $("#currentUVIndex").attr("style","background-color: green;")
+                          } else if (response.value >= 3 && response.value < 6 ){
+                            $("#currentUVIndex").attr("style","background-color: yellow;")
+                          } else if (response.value >= 6 && response.value < 8 ){
+                            $("#currentUVIndex").attr("style","background-color: orange;")
+                          } else if (response.value >= 8 && response.value < 11 ){
+                            $("#currentUVIndex").attr("style","background-color: red;")
+                          } else if (response.value >= 11 ){
+                            $("#currentUVIndex").attr("style","background-color: purple;")
+                          }
+                                
+                          
                 });
 
                 // build the forcast login
