@@ -1,5 +1,5 @@
 var queryParams = { "appid": "b51e4fed81185bd10d4c7e74fba739ca" };
-var today = moment().subtract(10, 'days').calendar();
+var today = moment().format('L');
 var theURL;
 
 function buildQueryURLcurrent(searchCity) {
