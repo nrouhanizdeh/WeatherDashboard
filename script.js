@@ -30,6 +30,10 @@ function dateFormat(dateAndTime){
     return datelist[0].replace(/-/g,"/");
 }
 
+function buildQueryURLicon(id){
+    return "http://openweathermap.org/img/wn/" + id + ".png"
+}
+
 showLocalStorage();
 $("#results").hide();
 $("#notfound").hide();
@@ -46,12 +50,12 @@ $(".runSearch").on("click", function(event) {
         cityId = $(`#city_${city.toLowerCase()}`);
         
         // check to see if the city_<city name> tag exists. if not, add the key/value in local storage and add the table row.
-        if(cityId.length === 0){
+        if(cityId.length === 0 && city.length > 0){
             localStorage.setItem(`city_${city.toLowerCase()}`, city.toLowerCase());
             $("table").append(`<tr><td class="card runSearch city" id=city_${city.toLowerCase()}>${city}</td></tr>`);
         }
     }
-    console.log(city);
+    if (city.length > 0){
     // query current wheather info for the city specified by the user
     $.ajax({
         url: buildQueryURLcurrent(city),
@@ -70,6 +74,7 @@ $(".runSearch").on("click", function(event) {
                 var tempFar = kelToFar(response.main.temp)
                 var cityLat = response.coord.lat;
                 var cityLon = response.coord.lon;
+
                 // take the two API response Vars above, and writes them to their respetive div/img IDs on the html
                 $("#currentTempreture").text("Tempreture: " + tempFar);
                 $("#currentHumidity").text("Humidity: " + response.main.humidity + "%");
@@ -86,6 +91,7 @@ $(".runSearch").on("click", function(event) {
                         $("#currentUVIndex").text("UV Index: " + response.value );
                 });
 
+                // build the forcast login
                 $.ajax({
                         url: buildQueryURLfuture(city),
                         method: "GET"
@@ -98,17 +104,14 @@ $(".runSearch").on("click", function(event) {
                             var index = response.list.findIndex(function(item, i){
                                 return item.dt === dtList[x]
                               });
+                            $(`#title${x}`).text(dateFormat(response.list[index].dt_txt));
                             $(`#temp${x}`).text("temp: " + kelToFar(response.list[index].main.temp));
                             $(`#humid${x}`).text("Humidity: " + response.list[index].main.humidity + "%");
-                            $(`#title${x}`).text(dateFormat(response.list[index].dt_txt));
-
-                            
+                            $(`#pic${x}`).attr("src", buildQueryURLicon(response.list[index].weather[0].icon));
+ 
                         }
-
                     });
             }}
-
         });
-
-
+    }
 });
