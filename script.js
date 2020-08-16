@@ -1,6 +1,3 @@
-// queryURLcurrent and queryURLforcast are the urls we'll use to query the API
-// var queryURLcurrent = "http://api.openweathermap.org/data/2.5/weather?";
-// var queryURLforcast = "http://api.openweathermap.org/data/2.5/forecast?";
 var queryParams = { "appid": "b51e4fed81185bd10d4c7e74fba739ca" };
 var today = moment().subtract(10, 'days').calendar();
 var theURL;
@@ -22,6 +19,15 @@ function showLocalStorage(){
             $("table").append(`<tr><td class="card runSearch city" id=city_${localKey}>${localKey}</td></tr>`);
         }
     }
+}
+function kelToFar(kelvin){
+    return ((parseFloat(kelvin) - 273.15)*9/5 + 32).toFixed(1) + " °F";
+}
+
+// extract and format the date that is returned from the API
+function dateFormat(dateAndTime){
+    var datelist = dateAndTime.split(" ");
+    return datelist[0].replace(/-/g,"/");
 }
 
 showLocalStorage();
@@ -61,11 +67,11 @@ $(".runSearch").on("click", function(event) {
                 $("#notfound").hide();
                 $("#results").show();
                 $("#topCardTitle").text(city + " (" + today + ")" );
-                var tempFar = ((parseFloat(response.main.temp) - 273.15)*9/5 + 32).toFixed(1);
+                var tempFar = kelToFar(response.main.temp)
                 var cityLat = response.coord.lat;
                 var cityLon = response.coord.lon;
                 // take the two API response Vars above, and writes them to their respetive div/img IDs on the html
-                $("#currentTempreture").text("Tempreture: " + tempFar + " °F");
+                $("#currentTempreture").text("Tempreture: " + tempFar);
                 $("#currentHumidity").text("Humidity: " + response.main.humidity + "%");
                 $("#currentWindSpeed").text("Wind Speed: " + response.wind.speed + " MPH");
 
@@ -81,16 +87,25 @@ $(".runSearch").on("click", function(event) {
                 });
 
                 $.ajax({
-                    url: buildQueryURLfuture(city),
-                    method: "GET"
+                        url: buildQueryURLfuture(city),
+                        method: "GET"
                     }).then(function(response) {
-                    var dateAndTime = response.list[0].dt_txt;
-                    var datelist = dateAndTime.split(" ");
-                    var dateFormatted = datelist[0].replace(/-/g,"/");
+                    
+                        var tomorrow = response.list[0].dt;
+                        var dtList = [tomorrow, tomorrow + 86400 , tomorrow + 2*86400, tomorrow + 3*86400, tomorrow + 4*86400];
 
-                    var tomorrow = response.list[0].dt + 86400;
-                    var dtlist = [tomorrow, tomorrow + 86400 , tomorrow + 2*86400, tomorrow + 3*86400, tomorrow + 4*86400];
-                });
+                        for (x in dtList) {
+                            var index = response.list.findIndex(function(item, i){
+                                return item.dt === dtList[x]
+                              });
+                            $(`#temp${x}`).text("temp: " + kelToFar(response.list[index].main.temp));
+                            $(`#humid${x}`).text("Humidity: " + response.list[index].main.humidity + "%");
+                            $(`#title${x}`).text(dateFormat(response.list[index].dt_txt));
+
+                            
+                        }
+
+                    });
             }}
 
         });
