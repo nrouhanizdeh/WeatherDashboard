@@ -80,7 +80,7 @@ $(".runSearch").on("click", function(event) {
                 $("#currentHumidity").text("Humidity: " + response.main.humidity + "%");
                 $("#currentWindSpeed").text("Wind Speed: " + response.wind.speed + " MPH");
 
-                var queryURLuvindex = "http://api.openweathermap.org/data/2.5/uvi?" ;
+                var queryURLuvindex = "https://api.openweathermap.org/data/2.5/uvi?" ;
                 queryParams.lat = cityLat;
                 queryParams.lon = cityLon;
 
